@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAÉ 3.01 Prise connectée | Chloé Charon</title>
+<meta name="description" content="Une prise électrique connectée que l'on commande depuis un bouton, un site web ou une application Android, avec une alerte si la température dépasse un seuil.">
+<meta name="theme-color" content="#12121c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312121c'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='700' text-anchor='middle' fill='%235ab0ff'%3E%24_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body data-base="../" data-nav="projets">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div id="site-header"></div>
+<main id="contenu" class="wrap">
+<header class="page-head">
+<p class="crumbs"><a href="../index.html">Accueil</a><span>/</span><a href="../projets.html">Projets</a><span>/</span>SAÉ 3.01</p>
+<p class="lab">SAÉ 3.01 · BUT 2 · semestre 3</p>
+<h1>Prise connectée</h1>
+
+<div class="tags"><span class="tag">Django</span><span class="tag">Broker</span><span class="tag">Arduino</span><span class="tag">Python</span><span class="tag">MQTT</span><span class="tag">Pushbullet</span><span class="tag">MIT App Inventor</span></div>
+</header>
+<div class="doc">
+<article class="prose">
+<div class="callout"><p class="lab">// en clair</p><p>Une prise électrique connectée que l'on commande depuis un bouton, un site web ou une application Android, avec une alerte si la température dépasse un seuil.</p></div>
+<section id="contexte"><h2>Contexte</h2>
+<dl class="kv" style="max-width:640px">
+<dt>type</dt><dd>SAÉ (situation d'apprentissage et d'évaluation) : un projet évalué qui mobilise plusieurs compétences</dd>
+<dt>année</dt><dd>BUT 2, semestre 3</dd>
+<dt>compétences</dt><dd>C2 Connecter</dd>
+<dt>organisation</dt><dd>Projet en groupe de 4</dd>
+<dt>intitulé officiel</dt><dd>Mettre en œuvre un dispositif de transmission</dd>
+</dl></section><section id="realisation"><h2>Ce qui a été réalisé</h2><p>Réalisation d'une prise connectée intelligente. Un certain nombre de paramètres sont gérés directement sur la prise, sur la page web et sur l'application Android, elle aussi codée pour se connecter directement à la prise.</p><p>Technologies utilisées : Django, Arduino, Python et un broker MQTT.</p><h3>Fonctions de la prise</h3><ul><li>Allumer ou éteindre la prise depuis un bouton poussoir (état visible sur le site et l'application).</li><li>Bouton ON/OFF sur le site et l'application, avec retour d'état.</li><li>Plages horaires ON/OFF programmables depuis le web et l'application.</li><li>Affichage de la température reçue du capteur de la prise (web et Android), avec un seuil de dépassement choisi par l'utilisateur : avertissement par notification sur le web et Android, et mail envoyé à l'utilisateur depuis le code Arduino.</li></ul></section><section id="ma-part"><h2>Ma part du travail</h2><p class="todo">[À COMPLÉTER : décris précisément ce que tu as fait toi-même dans ce projet de groupe, et ce qu'ont fait les autres]</p></section><section id="difficultes"><h2>Difficultés rencontrées</h2><p class="todo">[À COMPLÉTER : une difficulté concrète rencontrée pendant ce projet, et comment tu l'as résolue]</p></section><section id="appris"><h2>Ce que j'ai appris</h2><p>Ce projet réunissait programmation embarquée, développement web, application mobile et communication pour objets connectés dans un seul appareil : une vraie montée en complexité.</p><p>J'ai appris à connecter un Arduino à un serveur Django via MQTT, et à garder le bouton physique, la page web et l'application Android synchronisés en temps réel.</p><p>Construire l'alerte de température m'a appris à penser côté utilisateur : il ne suffit pas de faire fonctionner un capteur, il faut rendre la donnée utile.</p><p>Travailler à quatre m'a aussi poussée à organiser clairement les tâches et à communiquer régulièrement.</p></section><section id="fichiers"><h2>Fichiers et liens</h2><ul class="files"><li><a href="../../assets/BUT2/SAE_3.01/SAE3.01/FI/SAE301_Projet_PriseElectriqueWifi_FI_2025_26.pdf" target="_blank" rel="noopener"><span class="kind">PDF</span><span>Cahier des charges (PDF)</span></a></li><li><a href="../../assets/BUT2/SAE_3.01/SAE3.01/MontageBoutonPoussoir.jpg" target="_blank" rel="noopener"><span class="kind">IMAGE</span><span>Photo du montage du bouton poussoir</span></a></li></ul></section>
+<nav class="pager" aria-label="Projets voisins"><a class="link" href="sae-2-05.html">← SAÉ 2.05 Portfolio</a><a class="link" href="sae-3-02.html">SAÉ 3.02 Messagerie chiffrée inspirée de Tor →</a></nav>
+</article>
+<aside class="toc" data-toc aria-label="Sommaire"></aside>
+</div>
+</main>
+<div id="site-footer"></div>
+<noscript><p class="wrap soft">Le menu de navigation demande JavaScript. <a href="../index.html">Retour à l'accueil</a></p></noscript>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
