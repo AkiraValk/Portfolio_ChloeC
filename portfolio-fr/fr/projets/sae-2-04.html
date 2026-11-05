@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAÉ 2.04 Projet intégratif | Chloé Charon</title>
+<meta name="description" content="Un réseau d'entreprise complet, construit et protégé de bout en bout, en autonomie : réseau, téléphonie, collecte de capteurs et site web.">
+<meta name="theme-color" content="#12121c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312121c'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='700' text-anchor='middle' fill='%235ab0ff'%3E%24_%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body data-base="../" data-nav="projets">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div id="site-header"></div>
+<main id="contenu" class="wrap">
+<header class="page-head">
+<p class="crumbs"><a href="../index.html">Accueil</a><span>/</span><a href="../projets.html">Projets</a><span>/</span>SAÉ 2.04</p>
+<p class="lab">SAÉ 2.04 · BUT 1 · semestre 2</p>
+<h1>Projet intégratif</h1>
+
+<div class="tags"><span class="tag">Cisco IOS</span><span class="tag">Linux</span><span class="tag">VLAN</span><span class="tag">DHCP</span><span class="tag">ACL</span><span class="tag">MQTT</span><span class="tag">Django</span><span class="tag">MariaDB</span><span class="tag">Nginx</span><span class="tag">Linphone</span></div>
+</header>
+<div class="doc">
+<article class="prose">
+<div class="callout"><p class="lab">// en clair</p><p>Un réseau d'entreprise complet, construit et protégé de bout en bout, en autonomie : réseau, téléphonie, collecte de capteurs et site web.</p></div>
+<section id="contexte"><h2>Contexte</h2>
+<dl class="kv" style="max-width:640px">
+<dt>type</dt><dd>SAÉ (situation d'apprentissage et d'évaluation) : un projet évalué qui mobilise plusieurs compétences</dd>
+<dt>année</dt><dd>BUT 1, semestre 2</dd>
+<dt>compétences</dt><dd>C1 Administrer, C2 Connecter, C3 Programmer</dd>
+<dt>organisation</dt><dd>Travail individuel</dd>
+</dl></section><section id="realisation"><h2>Ce qui a été réalisé</h2><p>Projet de fin d'année qui met en œuvre toutes les compétences acquises au fil de la première année. L'objectif : installer un petit réseau d'entreprise avec de la téléphonie, une partie administrateur, une partie utilisateur et une partie web.</p><p>J'ai travaillé en autonomie sur la construction et la sécurisation d'un réseau local complet. J'ai mis en place plusieurs VLAN (administration, développeurs, administrateurs et voix), configuré le routage inter-VLAN, et segmenté l'adressage IP pour que chaque groupe d'utilisateurs ait son propre sous-réseau, avec des masques adaptés à chaque usage, distribués via DHCP sur les sous-interfaces du routeur.</p><p>J'ai aussi déployé plusieurs services : un serveur FTP sécurisé, Rsyslog, Nginx, Gunicorn et une base de données MariaDB. Côté sécurité, j'ai appliqué des ACL sur le routeur et le commutateur pour filtrer précisément les flux autorisés, sécurisé les ports des commutateurs avec port-security, et configuré l'isolation des VLAN pour limiter les risques d'intrusion.</p><p>Le projet réunit quatre parties distinctes, détaillées plus bas : le réseau, la téléphonie, la collecte MQTT et le service web.</p></section><section id="reseau"><h2>Réseau</h2>
+<p>Pour la partie réseau, j'ai entièrement conçu et simulé une architecture d'entreprise sur de vraies machines physiques, en créant plusieurs VLAN pour bien séparer les différents groupes d'utilisateurs (administration, développeurs, administrateurs, voix). J'ai centralisé la gestion des VLAN sur le commutateur principal, déplacé le VLAN natif pour plus de sécurité, et mis en place le routage inter-VLAN directement sur le routeur.</p>
+<p>J'ai aussi segmenté tout l'adressage IP pour que chaque groupe ait son propre sous-réseau, en réservant des plages spécifiques pour chaque usage (VLAN, production, interconnexion). Pour garantir la haute disponibilité, j'ai configuré le spanning-tree et l'équilibrage de charge sur les liens entre commutateurs. Enfin, j'ai appliqué des règles de sécurité : ACL sur les commutateurs et sur le routeur pour filtrer les flux, tout en assurant l'accès au DHCP et aux services essentiels.</p>
+<figure class="figure"><img src="../../assets/Images_PI/Sch_Infra.png" alt="Schéma de l'infrastructure réseau du projet intégratif" loading="lazy"><figcaption>Schéma de l'infrastructure réseau</figcaption></figure></section><section id="telephonie"><h2>Téléphonie</h2>
+<p>Pour la partie téléphonie, j'ai installé sur deux clients Windows du VLAN Utilisateurs le logiciel Linphone, avec deux comptes pour que les deux machines puissent dialoguer. J'ai attribué une adresse IP à un téléphone fixe via DHCP dans le VLAN Voix, pour isoler le trafic téléphonique du reste du réseau. Ce téléphone a aussi reçu un compte Linphone pour dialoguer. Cette partie a été la plus rapide à réaliser.</p>
+<figure class="figure"><img src="../../assets/Images_PI/Sch_Tel.png" alt="Schéma de la partie téléphonie" loading="lazy"><figcaption>Schéma de la partie téléphonie</figcaption></figure></section><section id="mqtt"><h2>Collecte MQTT</h2>
+<p>Pour la collecte de données, j'ai utilisé le protocole MQTT pour faire remonter en temps réel les mesures des capteurs vers mon application. J'ai développé un script Python basé sur la bibliothèque Paho MQTT, qui écoute les messages publiés sur un sujet (topic) dédié. Chaque message reçu est analysé, formaté puis inséré dans la base MariaDB.</p>
+<p>J'ai aussi prévu la gestion des déconnexions : si la base est indisponible, les messages sont mis en file d'attente et réinjectés dès que la connexion revient, ce qui garantit qu'aucune donnée n'est perdue. Ce système permet de suivre l'état des capteurs en continu, même en cas de coupure réseau ou de maintenance sur la base.</p>
+<p class="soft">Script Python, Paho MQTT, insertion MariaDB, gestion de file d'attente. Le script est téléchargeable dans la section « Fichiers et liens ».</p>
+</section><section id="web"><h2>Service web et base de données</h2>
+<p>Côté base de données et service web, j'ai mis en place une base MariaDB pour stocker toutes les données des capteurs et les informations sur les lieux. J'ai développé une application web avec Django pour visualiser et filtrer les mesures (par capteur, par date, par pièce) et générer des graphiques interactifs avec Chart.js.</p>
+<p>L'application permet aussi de modifier les informations sur les capteurs et d'administrer les données facilement. J'ai configuré Nginx et Gunicorn pour servir l'application à la racine du domaine, avec gestion des fichiers statiques et sécurité des accès. Toute l'intégration entre la collecte MQTT, la base et le site web est automatisée, ce qui rend l'ensemble fluide et simple à utiliser.</p>
+<figure class="figure"><img src="../../assets/Images_PI/Contenu_TMDB.png" alt="Contenu des tables de la base de données Maison" loading="lazy"><figcaption>Contenu des tables de la base de données « Maison »</figcaption></figure><figure class="figure"><img src="../../assets/Images_PI/MariaDBTables.png" alt="Tables de la base de données Maison sur MariaDB" loading="lazy"><figcaption>Tables de la base « Maison » sur MariaDB</figcaption></figure></section><section id="conclusion"><h2>Conclusion</h2>
+<p>Tout au long de ce projet, j'ai vraiment consolidé mes compétences techniques en réseaux et en administration système. J'ai appris à concevoir une architecture réseau complète, à configurer et dépanner des commutateurs Cisco (y compris le protocole Spanning Tree et le port mirroring), à utiliser PuTTY pour l'accès distant sécurisé et la gestion des équipements en ligne de commande, et à diagnostiquer les problèmes de connectivité VLAN avec des outils comme ping et la surveillance réseau.</p>
+<p>J'ai aussi automatisé la collecte et le traitement des données avec MQTT et MariaDB, et développé une interface web sous Django pour visualiser les données en temps réel. Sur la partie sécurité, j'ai mis en place des ACL et segmenté finement le réseau avec des VLAN adaptés à chaque usage. Enfin, j'ai pu configurer un service avancé comme la téléphonie sur IP, ce qui m'a permis de toucher à l'intégration de plusieurs briques d'un système d'information d'entreprise.</p>
+<p>Ce projet m'a donné une vision globale et concrète des métiers du réseau et des télécommunications, et m'a permis de me préparer à aller plus loin dans ce domaine.</p>
+</section><section id="difficultes"><h2>Difficultés rencontrées</h2><p class="todo">[À COMPLÉTER : une difficulté concrète rencontrée pendant ce projet, et comment tu l'as résolue]</p></section><section id="appris"><h2>Ce que j'ai appris</h2><p>C'était le projet le plus difficile de la première année, car il demandait tout en même temps : réseau, programmation et administration, qui devaient fonctionner ensemble.</p><p>J'ai utilisé VLAN, routage, DNS, DHCP et ACL côté réseau, Django et Nginx côté web, ainsi que MQTT et Arduino pour la partie objets connectés. J'ai aussi travaillé sur le port mirroring, les journaux serveur et les liens redondants.</p><p>Plus qu'une compétence en particulier, ce projet m'a appris à gérer la complexité et à garder la vision d'ensemble tout en réglant des problèmes à tous les niveaux.</p></section><section id="fichiers"><h2>Fichiers et liens</h2><ul class="files"><li><a href="../../assets/PI_MQTT/CollecteMQTT.py" target="_blank" rel="noopener"><span class="kind">PY</span><span>Programme de collecte MQTT (script Python)</span></a></li></ul></section>
+<nav class="pager" aria-label="Projets voisins"><a class="link" href="sae-2-03.html">← SAÉ 2.03 Site web de gestion de cinéma</a><a class="link" href="sae-2-05.html">SAÉ 2.05 Portfolio →</a></nav>
+</article>
+<aside class="toc" data-toc aria-label="Sommaire"></aside>
+</div>
+</main>
+<div id="site-footer"></div>
+<noscript><p class="wrap soft">Le menu de navigation demande JavaScript. <a href="../index.html">Retour à l'accueil</a></p></noscript>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
