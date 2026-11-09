@@ -114,11 +114,16 @@
       cards.forEach(function (c) {
         var okYear = state.year === 'all' || c.getAttribute('data-year') === state.year;
         var okComp = state.comp === 'all' || (' ' + c.getAttribute('data-comps') + ' ').indexOf(' ' + state.comp + ' ') > -1;
-        var okQ = !state.q || norm(c.textContent).indexOf(state.q) > -1;
+        var okQ = !state.q || norm(c.getAttribute('data-search') || c.textContent).indexOf(state.q) > -1;
         var ok = okYear && okComp && okQ;
         c.hidden = !ok;
         if (ok) shown++;
       });
+      Array.prototype.forEach.call(list.querySelectorAll('.year-group'), function (g) {
+        g.hidden = !g.querySelector('.pcard:not([hidden])');
+      });
+      var feat = document.getElementById('featured');
+      if (feat) feat.hidden = state.year !== 'all' || state.q !== '';
       count.textContent = shown + (shown > 1 ? ' projets affichés' : ' projet affiché');
     }
 
@@ -136,5 +141,35 @@
       search.addEventListener('input', function () { state.q = norm(search.value.trim()); apply(); });
     }
     apply();
+  }
+
+  // ---- 5. Navigation entre fiches projet : transforme les liens du bas de page en 3 boutons ----
+  var pg = document.querySelector('nav.pager[aria-label="Projets voisins"]');
+  if (pg) {
+    var prevA = null, nextA = null;
+    Array.prototype.forEach.call(pg.querySelectorAll('a'), function (a) {
+      var t = a.textContent.trim();
+      if (t.indexOf('←') === 0) prevA = a;
+      else if (t.slice(-1) === '→') nextA = a;
+    });
+    var cell = function (a, cls, label) {
+      if (!a) return document.createElement('span');
+      var c = document.createElement('a');
+      c.className = 'pnav ' + cls;
+      c.href = a.getAttribute('href');
+      var m = document.createElement('span'); m.className = 'meta'; m.textContent = label;
+      var st = document.createElement('strong');
+      st.textContent = a.textContent.replace(/^\s*←\s*/, '').replace(/\s*→\s*$/, '');
+      c.appendChild(m); c.appendChild(st);
+      return c;
+    };
+    var mid = document.createElement('a');
+    mid.className = 'pnav mid'; mid.href = base + 'projets.html';
+    mid.innerHTML = '<span class="meta">retour</span><strong>Tous les projets</strong>';
+    pg.className = 'pager pager3';
+    pg.innerHTML = '';
+    pg.appendChild(cell(prevA, 'prev', '← projet précédent'));
+    pg.appendChild(mid);
+    pg.appendChild(cell(nextA, 'next', 'projet suivant →'));
   }
 })();
