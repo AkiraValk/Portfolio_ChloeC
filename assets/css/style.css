@@ -296,3 +296,34 @@ table.matrix { width: 100%; border-collapse: collapse; font-size: 15px; min-widt
   body { background: #fff; color: #000; }
   .site-header, .toc, .site-footer, .skip-link { display: none; }
 }
+
+/* ---- Catalogue v2 : liste compacte ---- */
+.year-group { margin: 0 0 36px; }
+.year-group h2 { font-size: 22px; margin: 0 0 12px; display: flex; align-items: center; gap: 14px; }
+.year-group h2::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.plist { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--bg2); }
+.prow { display: grid; grid-template-columns: 120px minmax(0, 1fr) 24px; gap: 18px; align-items: center; padding: 16px 22px; color: var(--text); text-decoration: none; border-top: 1px solid var(--line); }
+.prow:first-child { border-top: 0; }
+.prow:hover, .prow:focus-visible { background: rgba(90,176,255,.08); }
+.pcode { font-family: var(--font-mono); font-size: 13px; color: var(--violet); }
+.ptext { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ptext strong { font-weight: 600; color: #fff; font-size: 17px; }
+.ptext span { color: var(--soft); font-size: 15px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.parrow { color: var(--accent); font-family: var(--font-mono); }
+.prow:hover .parrow { transform: translateX(3px); }
+.prow[hidden], .year-group[hidden], #featured[hidden] { display: none; }
+@media (max-width: 560px) {
+  .prow { grid-template-columns: minmax(0, 1fr) 20px; padding: 14px 16px; gap: 4px 12px; }
+  .pcode { grid-column: 1 / -1; }
+  .ptext span { -webkit-line-clamp: 2; }
+}
+
+/* ---- Navigation entre fiches ---- */
+.pager3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+.pnav { display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg2); color: #fff; text-decoration: none; }
+.pnav strong { font-weight: 600; font-size: 15px; line-height: 1.35; }
+.pnav:hover, .pnav:focus-visible { border-color: var(--accent); }
+.pnav.next { text-align: right; }
+.pnav.mid { text-align: center; border-color: transparent; background: transparent; justify-content: center; }
+.pnav.mid strong { color: var(--accent); }
+@media (max-width: 700px) { .pager3 { grid-template-columns: minmax(0, 1fr); } .pnav.next, .pnav.mid { text-align: left; } }
