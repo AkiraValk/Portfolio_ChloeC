@@ -19,7 +19,7 @@
     ['stage',       'Stage',       'stage.html'],
     ['projets',     'Projets',     'projets.html'],
     ['formation',   'Formation',   'formation.html'],
-    ['competences', 'Compétences', 'competences.html'],
+    ['competences', 'Mes compétences', 'competences.html'],
     ['parcours',    'Parcours',    'parcours.html'],
     ['contact',     'Contact',     'contact.html']
   ];
